@@ -31,30 +31,76 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+        it('entries have URL defined and nonzero', function() {
+            allFeeds.forEach(function (el) {
+                // is defined
+                expect(el.url).toBeDefined();
+                // is a string
+                expect(el.url).toEqual(jasmine.any(String));
+                // is not blank
+                expect(el.url).not.toBe(0);
+                // correct url format (regex from: http://regexr.com/39nr7) overkill ????
+                expect(el.url).toMatch(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
+            });
+        });
 
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+        it('entries have name defined and nonzero', function() {
+            allFeeds.forEach(function (el) {
+                // is defined
+                expect(el.name).toBeDefined();
+                // is a string
+                expect(el.name).toEqual(jasmine.any(String));
+                // is not blank
+                expect(el.name).not.toBe(0);
+            });
+        });
     });
 
-
     /* TODO: Write a new test suite named "The menu" */
-
+    describe('The menu', function() {
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+        var menuButton = $('.menu-icon-link'),
+            menuVisible = function () {
+                return  $('body').hasClass('menu-hidden');
+            };
+
+        beforeEach(function () {
+
+        })
+
+        it('is intially hidden', function() {
+            expect(menuVisible()).toBeTruthy();
+        });
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        it('changes visibility when clicked', function() {
+            menuButton.click();
+            expect(menuVisible()).toBeFalsy();
+
+            menuButton.click();
+            expect(menuVisible()).toBeTruthy();
+        });
+    });  
 
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe("Initial Entries",function () {
+
+        beforeEach(function (done) {
+            loadFeed(0, done);
+        });
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -62,11 +108,42 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+        it('has at least one entry', function() {
+            var entries = $('.feed .entry');
+            expect(entries.length).toBeGreaterThan(0);
+        });
+    });
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    /* test suite named "New Feed Selection" */
+    describe('New Feed Selection', function() {
 
+        var beforeContent;
+
+        beforeEach(function (done) {
+            loadFeed(0, function () {
+                beforeContent = $('.feed').text();
+                done();
+            });
+        });
+        
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
+        it('on feed change content changes', function(done) {
+            loadFeed(1, function () {
+                afterContent = $('.feed').text();
+                expect(afterContent).not.toBe(beforeContent);
+                done();
+            });
+        });
+
+        /* Probably not ncessary but display feed 0,
+         * as expected if tests do not run.
+         */
+        afterAll(function () {
+            loadFeed(0);
+        })
+    });
+
 }());
