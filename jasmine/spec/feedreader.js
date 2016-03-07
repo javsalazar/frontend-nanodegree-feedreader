@@ -34,7 +34,7 @@ $(function() {
                 // is a string
                 expect(el.url).toEqual(jasmine.any(String));
                 // is not blank
-                expect(el.url).not.toBe(0);
+                expect(el.url.length).not.toBe(0);
                 // correct url format (regex from: http://regexr.com/39nr7) overkill ????
                 expect(el.url).toMatch(/[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/);
             });
@@ -51,7 +51,7 @@ $(function() {
                 // is a string
                 expect(el.name).toEqual(jasmine.any(String));
                 // is not blank
-                expect(el.name).not.toBe(0);
+                expect(el.name.length).not.toBe(0);
             });
         });
 
