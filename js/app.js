@@ -23,6 +23,24 @@ var allFeeds = [
     }
 ];
 
+var Feed = function(obj){
+    this.name = obj.name,
+    this.url = obj.url,
+    this.id = obj.id
+};
+
+var addFeed = function(array, feed){
+    array.push(feed);
+};
+
+var getFeed = function(array, index){
+    return array[index];
+};
+
+var removeFeed = function(array, index){
+    array.splice(index,1);
+};
+
 /* This function starts up our application. The Google Feed
  * Reader API is loaded asynchonously and will then call this
  * function when the API is loaded.
