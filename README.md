@@ -34,6 +34,7 @@ while the actual functions for above tests were implemented (in js/app.js) the b
 
 2. open index.html in browser and at bottom of page all jasmine tests will be displayed with their results.
 
+3. Optionally can be viewed [here](http://javsalazar.github.io/frontend-nanodegree-feedreader)
 
 ## Improved view of feeds
 
