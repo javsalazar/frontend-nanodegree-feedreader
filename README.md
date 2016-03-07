@@ -38,5 +38,5 @@ while the actual functions for above tests were implemented (in js/app.js) the b
 
 ## Improved view of feeds
 
-Added the date and summary of each entry to be displayed.  Originally created a test for the existstance of a summary then decided against it.  A summary is optional (as seen by HTML5 Rocks feed) so no need to have a failing test on something that may be optional. 
+Added the date and summary of each entry to be displayed.  Originally created a test for the existence of a summary then decided against it.  A summary is optional (as seen by HTML5 Rocks feed) so no need to have a failing test on something that may be optional. 
 
