@@ -55,6 +55,33 @@ $(function() {
             });
         });
 
+        /* Ensure that a new feed can be added to
+         * the feed list array.
+         */
+        it('can add a feed', function() {
+
+            // index of new feed will be equal to length of array prior to addition (since zero based)
+            var index = allFeeds.length,
+            thisFeed = new Feed({name: "feedname", url: "http://test.com/feed", id: allFeeds.length});
+
+            // will need a function to add new feed
+            addFeed(allFeeds, thisFeed);
+
+            // with this test we see we will need a getFeed function that will accept array and integer index
+            expect(getFeed(allFeeds, index)).toBe(thisFeed);
+        });
+
+        /* Ensure that a feed from list array can be removed */
+        it('can remove a feed', function() {
+
+            var index = allFeeds.length -  1;
+            // will need a function to remove a feed that accepts array and index of entry to remove
+            removeFeed(allFeeds, index);
+
+            // will need a getFeed function that will accept integer index
+            expect(getFeed(allFeeds,index)).not.toBeDefined();
+        });
+
     });
 
     /* "The menu" test suite */
